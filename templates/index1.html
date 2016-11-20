@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Yarn</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style1.css') }}">
+		<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/rita-full1.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/nlp_compromise.min1.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/script1.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/p5.min1.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jQuery.js') }}"></script>
+		<script type="text/javascript">
+			function start(){
+				handle=setInterval(foo, 10000);
+			}
+			function foo(){
+				var text=document.getElementById('ustory').textContent;
+				$.ajax({
+					type: 'POST',
+					url:"/",
+					contentType:'application/json;charset=UTF-8',
+					dataType:'json',
+					data: JSON.stringify({'hello':text}),
+					success: function(response){
+						genre=response['hello'];
+						console.log(genre);
+						glob = genre;
+						changeCol();
+					},
+					error: function(error){
+						console.log(error);
+					}
+				});
+			}
+		</script>
+	</head>
+	<body onload="beginChecks();start();">
+		<div id="topbar" onclick="stop();">~ YARN ~</div>
+		<div id = "randSent"> Hello, this is a sentence.</div>
+		<div id="cont">
+			<div id="set1">
+				<div id="keybox">
+					<h3>Keywords</h3>
+					<hr><br>
+					<p id="keyws" class="">-</p>
+				</div>
+				<div id="peepbox">
+					<h3>Characters</h3>
+					<hr><br>
+					<p id="peeps">-</p>
+				</div>
+			</div>
+			<div id = "ustory"  oncontextmenu="addDef(event)" contenteditable="true">Yarn</div>
+			<div id="set2">
+				<div id="wcount">
+					<div id="spkr" onclick="bolo()">Narrate Text<br>~</div>
+					<h3 id="wc">0</h3>
+					<p id="words">Words</p>
+					<hr class="rt"><br>
+					<h3 id="synohead">Synonym</h3>
+					<hr class="rt">
+					<h4 id="syntitle"></h4>
+					<p id="syno"></p>
+				</div>
+
+			</div>
+		</div>
+		<div id="water" onclick="copyToClip()">Take to Wattpad</div>
+		<div id="saver" onclick="saveAsTXT()">Save as .TXT</div>
+	</body>
+</html>
