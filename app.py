@@ -1,9 +1,9 @@
+import json
 import sys
+from flask import Flask, render_template, request
+import check_genre
 reload(sys)
 sys.setdefaultencoding('utf8')
-from flask import Flask, render_template, request, redirect
-import json
-import check_genre
 app = Flask(__name__)
 
 
